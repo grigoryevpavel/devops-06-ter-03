@@ -1,6 +1,6 @@
 locals{
     vms_metadata = {
       serial-port-enable = 1
-      ssh-keys  = file("~/.ssh/id_rsa.pub") 
+      ssh-keys  = "ubuntu:${file("~/.ssh/id_rsa.pub")} " 
     }
 }

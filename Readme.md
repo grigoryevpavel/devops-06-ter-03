@@ -12,7 +12,9 @@
 
 В подсети **develop** располагаются **Группы безопасности**. Там была создана единственная группа **example_dynamic**. Внутри неё располаются входящие(ingress) и исходящие правила(egress) доступа к подсети
 Вид **ingress** правил представлен на скриншоте ниже:
-<img src='images/IngressRules.png'/>
+<img src='images/IngressRules.png'/> 
+
+Решение находится в [файле](https://github.com/grigoryevpavel/devops-06-ter-03/blob/master/src/count-vm.tf) 
 
 # Задание 2
 
@@ -26,6 +28,8 @@
 
 <img src='images/terrafrom2.png'/>
 
+Решение находится в [файле](https://github.com/grigoryevpavel/devops-06-ter-03/blob/master/src/for_each-vm.tf) 
+
 # Задание 3
 
 1. Создайте 3 одинаковых виртуальных диска размером 1 Гб с помощью ресурса yandex_compute_disk и мета-аргумента count в файле **disk_vm.tf** .
@@ -37,3 +41,33 @@
    <img src='images/terraform3.png'/>
 2. Созданные виртульные машины:
    <img src='images/VM3.png'/>
+3. Решение находится в [файле](https://github.com/grigoryevpavel/devops-06-ter-03/blob/master/src/disk_vm.tf) 
+
+# Задание 4
+
+1. В файле ansible.tf создайте inventory-файл для ansible.
+Используйте функцию tepmplatefile и файл-шаблон для создания ansible inventory-файла из лекции.
+Готовый код возьмите из демонстрации к лекции [**demonstration2**](https://github.com/netology-code/ter-homeworks/tree/main/demonstration2).
+Передайте в него в качестве переменных группы виртуальных машин из задания 2.1, 2.2 и 3.2, т. е. 5 ВМ.
+2. Инвентарь должен содержать 3 группы [webservers], [databases], [storage] и быть динамическим, т. е. обработать как группу из 2-х ВМ, так и 999 ВМ.
+4. Выполните код. Приложите скриншот получившегося файла. 
+
+Для общего зачёта создайте в вашем GitHub-репозитории новую ветку terraform-03. Закоммитьте в эту ветку свой финальный код проекта, пришлите ссылку на коммит.   
+**Удалите все созданные ресурсы**.
+
+# Решение 4
+
+1. Для генерации inventory файла используем resource "local_file" с атрибутами filename и content:
+   > filename="${abspath(path.module)}/ansible/hosts.cfg"
+   > content= templatefile("${abspath(path.module)}/ansible/hosts.tftpl",{
+   >     webservers= [for i in yandex_compute_instance.web: i ] 
+   >     databases=  [for k,v in yandex_compute_instance.database: v ] 
+   >     storages= tolist( [yandex_compute_instance.storage])  
+   >  }) 
+2. Атрибут content инициализируем значением функции templatefile
+
+В итоге получился следующий inventory файл:
+<img src='images/inventoryfile.png'/>
+
+
+

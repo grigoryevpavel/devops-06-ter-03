@@ -1,5 +1,5 @@
 #создаем 2 идентичные ВМ
-resource "yandex_compute_instance" "example" {
+resource "yandex_compute_instance" "database" {
   depends_on  = [yandex_compute_instance.web ]
   for_each = { for s in var.vms_settings: index(var.vms_settings,s)=> s }
   name        = each.value.vm_name
