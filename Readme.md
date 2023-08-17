@@ -12,7 +12,9 @@
 
 В подсети **develop** располагаются **Группы безопасности**. Там была создана единственная группа **example_dynamic**. Внутри неё располаются входящие(ingress) и исходящие правила(egress) доступа к подсети
 Вид **ingress** правил представлен на скриншоте ниже:
-<img src='images/IngressRules.png'/>
+<img src='images/IngressRules.png'/> 
+
+Решение находится в [файле](https://github.com/grigoryevpavel/devops-06-ter-03/blob/master/src/count-vm.tf) 
 
 # Задание 2
 
@@ -26,6 +28,8 @@
 
 <img src='images/terrafrom2.png'/>
 
+Решение находится в [файле](https://github.com/grigoryevpavel/devops-06-ter-03/blob/master/src/for_each-vm.tf) 
+
 # Задание 3
 
 1. Создайте 3 одинаковых виртуальных диска размером 1 Гб с помощью ресурса yandex_compute_disk и мета-аргумента count в файле **disk_vm.tf** .
@@ -37,3 +41,4 @@
    <img src='images/terraform3.png'/>
 2. Созданные виртульные машины:
    <img src='images/VM3.png'/>
+3. Решение находится в [файле](https://github.com/grigoryevpavel/devops-06-ter-03/blob/master/src/disk_vm.tf) 
