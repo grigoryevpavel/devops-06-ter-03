@@ -41,6 +41,7 @@
    <img src='images/terraform3.png'/>
 2. Созданные виртульные машины:
    <img src='images/VM3.png'/>
+
 3. Решение находится в [файле](https://github.com/grigoryevpavel/devops-06-ter-03/blob/master/src/disk_vm.tf) 
 
 # Задание 4
@@ -69,5 +70,4 @@
 В итоге получился следующий inventory файл:
 <img src='images/inventoryfile.png'/>
 
-
-
+ 
